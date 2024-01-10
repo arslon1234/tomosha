@@ -1,0 +1,92 @@
+// layout 共用样式
+$headerHeight: 50px; // Header
+$breadHeight: 40px;
+$menuFoldWidth: 64px;
+$menuExpandWidth: 200px;
+$menuTranstionDuration: 200ms;
+
+.layout {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    height: $headerHeight;
+    line-height: $headerHeight;
+    background-color: var(--el-color-primary);
+    &.dark {
+      background-color: var(--el-bg-color-overlay);
+    }
+    &-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #fff;
+      font-size: 20px;
+      font-weight: bold;
+      transition-property: all;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: $menuTranstionDuration;
+      overflow: hidden;
+      white-space: nowrap;
+      cursor: pointer;
+      &.dark {
+        color: var(--el-text-color-primary);
+      }
+      &.fold {
+        width: $menuFoldWidth;
+      }
+      &.expand {
+        width: $menuExpandWidth;
+      }
+    }
+  }
+
+  &-aside {
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: $menuTranstionDuration;
+    background-color: var(--el-color-primary);
+    scrollbar-width: thin;
+    &.dark {
+      background-color: var(--el-bg-color-overlay);
+    }
+    &.fold {
+      width: $menuFoldWidth;
+    }
+    &.expand {
+      width: $menuExpandWidth;
+    }
+  }
+
+  &-main {
+    height: calc(100% - $headerHeight);
+    background-color: var(--el-bg-color-page);
+    &-content {
+      position: relative;
+      padding: 12px;
+      background-color: var(--el-bg-color-page);
+      border-radius: 4px;
+      overflow-x: hidden;
+      &.transparent {
+        background-color: var(--el-bg-color-page);
+        .main-wrapper {
+          padding: 0;
+          background-color: var(--el-bg-color-page);
+        }
+      }
+      .main-wrapper {
+        padding: 12px;
+        background-color: var(--el-bg-color-overlay);
+        border-radius: 4px;
+      }
+    }
+  }
+}
