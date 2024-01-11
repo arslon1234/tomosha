@@ -1,7 +1,7 @@
 <script setup lang="ts">
-// import Footer from "../../layout/Footer.vue";
 import Navbar from "../../layout/Navbar.vue";
 import VButton from "../../components/form/VButton.vue";
+import Footer from "../../layout/Footer.vue";
 </script>
 
 <template>
@@ -17,6 +17,7 @@ import VButton from "../../components/form/VButton.vue";
     <VButton class="mt-[20px]" btn_type="not_found">На главную</VButton>
   </div>
   </div>
+  <Footer/>
 </section>
 </template>
 
