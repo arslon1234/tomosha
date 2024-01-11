@@ -1,51 +1,25 @@
 <script setup lang="ts">
 import {reactive, ref} from "vue";
-import type {FormInstance, FormRules} from 'element-plus'
-import exit from "../../assets/x.svg"
-import GOOGLE from "../../assets/google.svg"
-import OK from "../../assets/ok.svg"
-import FACEBOOK from "../../assets/facebook.svg"
-import YANDEX from "../../assets/yandex.svg"
+import type {FormInstance} from 'element-plus';
+import exit from "@/assets/x.svg";
+import GOOGLE from "@/assets/google.svg";
+import OK from "@/assets/ok.svg";
+import FACEBOOK from "@/assets/facebook.svg";
+import YANDEX from "@/assets/yandex.svg";
+import {rules} from "./rules";
 
-interface RuleForm {
-  fio: string,
-  phone: string,
-  login: string,
-  password: string
-}
-
-const ruleFormRef = ref<FormInstance>()
+const ruleFormRef = ref<FormInstance>();
 //inputs value
 const form = reactive({
   fio: "",
   phone: "",
   login: "",
   password: ""
-})
+});
 
-//rules
-const rules = reactive<FormRules<RuleForm>>({
-  fio: [
-    {required: true, message: 'Please input Activity name', trigger: 'blur'},
-    {min: 4, max: 15, message: 'Length should be 3 to 5', trigger: 'blur'},
-  ],
-  phone: [
-    {required: true, message: 'Please input Activity name', trigger: 'blur'},
-    {min: 4, max: 15, message: 'Length should be 3 to 5', trigger: 'blur'},
-  ],
-  login: [
-    {required: true, message: 'Please input Activity name', trigger: 'blur'},
-    {min: 4, max: 15, message: 'Length should be 3 to 5', trigger: 'blur'},
-  ],
-  password: [
-    {required: true, message: 'Please input Activity name', trigger: 'blur'},
-    {min: 4, max: 15, message: 'Length should be 3 to 5', trigger: 'blur'},
-  ]
-})
 
 const submitForm = async (formEl: FormInstance | undefined) => {
-  console.log("as", formEl)
-  if (!formEl) return
+  if (!formEl) return;
   await formEl.validate((valid, fields) => {
     if (valid) {
       console.log('submit!')
@@ -54,7 +28,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       console.log('error submit!', fields)
     }
   })
-}
+};
 </script>
 
 <template>
