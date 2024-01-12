@@ -1,11 +1,28 @@
 <script setup lang="ts">
-import {reactive} from "vue";
-import exit from "../../assets/x.svg"
+import {reactive, ref} from "vue";
+import exit from "../../assets/x.svg";
+import {rules} from "./rules";
+import {FormInstance} from "element-plus";
+
+const ruleFormRef = ref<FormInstance>();
 
 const form = reactive({
   login: "",
   password: ""
 })
+
+const submitForm = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+  await formEl.validate((valid, fields) => {
+    if (valid) {
+      console.log('submit!')
+      console.log('form value', form)
+    } else {
+      console.log('error submit!', fields)
+    }
+  })
+}
+
 </script>
 
 <template>
@@ -27,14 +44,24 @@ const form = reactive({
     </div>
     <div class="login-form__inputs">
       <div class="relative">
-        <el-form class="flex flex-col gap-[20px] mb-[20px] mt-[20px]">
-          <el-input v-model="form.login" placeholder="Логин"/>
-          <el-input v-model="form.password" placeholder="Пароль"/>
+        <el-form
+            ref="ruleFormRef"
+            :rules="rules"
+            :model="form"
+            class="flex flex-col gap-[20px] mb-[20px] mt-[20px]"
+        >
+          <el-form-item prop="login">
+            <el-input v-model="form.login" placeholder="Логин"/>
+          </el-form-item>
+          <el-form-item prop="password">
+            <el-input v-model="form.password" placeholder="Пароль"/>
+          </el-form-item>
         </el-form>
       </div>
     </div>
 
     <el-button
+        @click="submitForm(ruleFormRef)"
         class=" w-full  text-sm "
     >
       Подтверждение
