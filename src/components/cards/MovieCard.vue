@@ -1,6 +1,5 @@
 <script setup lang="ts">
-
-const props = defineProps({
+defineProps({
   url: {
     type: String,
     default: "src/assets/film.png"
@@ -19,7 +18,6 @@ const props = defineProps({
   }
 })
 
-console.log("asdfsdfsdf", props)
 </script>
 <template>
   <div class="movie-card">
