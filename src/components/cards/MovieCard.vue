@@ -19,7 +19,7 @@ const props = defineProps({
   }
 })
 
-console.log(props)
+console.log("asdfsdfsdf", props)
 </script>
 <template>
   <div class="movie-card">
