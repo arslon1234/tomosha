@@ -4,13 +4,17 @@ import SEARCH from '../assets/search.svg'
 import USER from '../assets/user.svg'
 import BookMark from '../assets/bookmark.svg'
 import LANGUAGE from '../assets/lang.svg'
-import i18n from '../plugins/i18n'
+import i18n from '../plugins/i18n.ts'
+import { useI18n } from "vue-i18n";
+const { t } = useI18n({
+  inheritLocale: true
+});
 const navbar_items = reactive([
-  {title: "Премьеры", path: "#"},
-  {title: "Жанр", path: "#"},
-  {title: "Фильмы", path: "#"},
-  {title: "Сериалы", path: "#"},
-  {title: "Мультфильмы", path: "#"},
+  {title: t('premieres'), path: "#"},
+  {title: t('genre'), path: "#"},
+  {title: t('movies'), path: "#"},
+  {title: t('series'), path: "#"},
+  {title: t('cartoons'), path: "#"},
 ])
 const dropdownOpen = ref(false);
 const change_lang = ref("Русский")
@@ -29,7 +33,6 @@ const path = window.location.href.split('/')[3]
 
 
 const changeLanguage =(lang: string)=>{
-  location.reload();
   if(lang === 'ru'){
     change_lang.value = "Русский"
   }else {
@@ -38,6 +41,7 @@ const changeLanguage =(lang: string)=>{
   localStorage.setItem('lang', lang)
   localStorage.setItem('change_lang', change_lang.value)
   i18n.global.locale = lang;
+  location.reload();
   dropdownOpen.value = false
 }
 onMounted(()=>{
@@ -48,6 +52,12 @@ onMounted(()=>{
     change_lang.value = "Русский"
   }
 })
+onMounted(() => {
+  if (!localStorage.getItem("lang")) {
+    localStorage.setItem("lang", "uz");
+  }
+  i18n.global.locale = localStorage.getItem("lang");
+});
 </script>
 
 <template>
@@ -64,7 +74,7 @@ onMounted(()=>{
     <img :src="SEARCH" alt="search">
     <router-link to="/saved">
       <img v-if="path !== 'saved'" :src="BookMark" alt="bookmark">
-      <span v-if="path == 'saved'" class="text-[#fff] w-[15px] h-[18px]"><i class="fa-solid fa-bookmark"></i></span>
+      <span v-if="path == 'saved'" class="text-[#fff] text-[18px]"><i class="fa-solid fa-bookmark"></i></span>
     </router-link>
     <!--      avatar-->
     <div class="relative w-[100px] h-[38px] cursor-pointer">
