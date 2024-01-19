@@ -17,25 +17,27 @@ import AppleGallery from '../assets/apple_gallery.svg'
 import Explore from '../assets/explore.svg'
 import AppGalleryText from '../assets/app_gallary_text.svg'
 import {reactive} from "vue";
+import {useTranslation} from "@/plugins/useTranslation.ts";
+const {translate} = useTranslation()
 
 const about = reactive([
-  {title: 'Контакты', path:"#"},
-  {title: 'Реклама', path:"#"},
-  {title: 'Поддерживать', path:"#"},
-  {title: 'Подписки', path:"#"},
-  {title: 'Партнеры', path:"#"},
-  {title: 'Авторские права', path:"#"},
+  {title: translate('contacts'), path:"#"},
+  {title: translate('advertising'), path:"#"},
+  {title: translate('support'), path:"#"},
+  {title: translate('subscriptions'), path:"#"},
+  {title: translate('partners'), path:"#"},
+  {title: translate('copyright'), path:"#"},
 ])
 const category = reactive([
-  {title: 'Премьеры', path:"#"},
-  {title: 'Новинки 2020', path:"#"},
-  {title: 'Мультфильмы', path:"#"},
+  {title: translate('premieres'), path:"#"},
+  {title: translate('new_year'), path:"#"},
+  {title: translate('cartoons'), path:"#"},
   {title: 'Подборки', path:"#"},
   {title: 'Обратная связь', path:"#"},
 ])
 const others = reactive([
-  {title: 'Вакансии', path:"#"},
-  {title: 'Сертификат', path:"#"},
+  {title: translate('vacancies'), path:"#"},
+  {title: translate('certificate'), path:"#"},
 ])
 const social = reactive([
   {img: TELEGRAM, path: ""},
@@ -58,7 +60,7 @@ const programs = reactive([
 <footer class="footer">
   <section class="footer__top">
     <div>
-      <p class="text-[22px] font-semibold text-[#fff]">О нас</p>
+      <p class="text-[22px] font-semibold text-[#fff]">{{translate('about_us')}}</p>
       <ul>
         <li v-for="(item,index) in about" :key="index" class="text-[18px] text-[#FFFFFF80]">
           <a :href="item.path">{{item.title}}</a>
@@ -66,7 +68,7 @@ const programs = reactive([
       </ul>
     </div>
     <div>
-      <p class="text-[22px] font-semibold text-[#fff]">Категория</p>
+      <p class="text-[22px] font-semibold text-[#fff]">{{translate('category')}}</p>
       <ul>
         <li v-for="(item,index) in category" :key="index" class="text-[18px] text-[#FFFFFF80]">
           <a :href="item.path">{{item.title}}</a>
@@ -74,7 +76,7 @@ const programs = reactive([
       </ul>
     </div>
     <div>
-      <p class="text-[22px] font-semibold text-[#fff]" >Другой</p>
+      <p class="text-[22px] font-semibold text-[#fff]" >{{translate('other')}}</p>
       <ul>
         <li v-for="(item,index) in others" :key="index" class="text-[18px] text-[#FFFFFF80]">
           <a :href="item.path">{{item.title}}</a>
@@ -82,22 +84,22 @@ const programs = reactive([
       </ul>
     </div>
     <div>
-      <p class="text-[22px] font-semibold text-[#fff]">Социальные сети</p>
+      <p class="text-[22px] font-semibold text-[#fff]">{{translate('social_media')}}</p>
       <div class="flex max-w-[252px] flex-wrap gap-[20px]">
         <article class="w-[48px] h-[48px] bg-black-1 rounded-[6px] flex items-center justify-center" v-for="(item,index) in social" :key="index">
-          <img :src="item.img" alt="">
+          <img :src="item.img" alt="social media">
         </article>
       </div>
     </div>
     <div class="flex flex-col max-w-[280px] gap-[20px] items-center">
      <div class="bg-red p-[12px] rounded-[35px] footer__top-abs">
-       <img :src="ABS" alt="">
+       <img :src="ABS" alt="advertising">
      </div>
-      <p class="text-[18px] text-[#FFFFFFBF] leading-6 text-center">Смотрите фильмы, сериалы и мультфильмы без рекламы</p>
+      <p class="text-[18px] text-[#FFFFFFBF] leading-6 text-center">{{translate('watch_without_add')}}</p>
     </div>
   </section>
   <section class="mt-[42px]">
-  <h1 class="text-[22px] font-semibold text-[#fff]">Программы</h1>
+  <h1 class="text-[22px] font-semibold text-[#fff]">{{translate('programs')}}</h1>
     <div class="mt-[30px] flex gap-[20px]">
      <div v-for="(item,index) in programs" :key="index" class="w-[183px] flex gap-[10px] px-[15px] py-[10px] bg-black-1 rounded-[5px]">
        <div>
@@ -114,10 +116,10 @@ const programs = reactive([
   </div>
   <section class="flex justify-between items-center">
   <p class="text-[18px] font-medium text-[#FFFFFF80]">
-    © TOMOSHA.UZ - Все права защищены. 2023 - 2024
+    © TOMOSHA.UZ - {{translate('reserved')}}
   </p>
     <p class="text-[18px] font-medium text-[#FFFFFF80]">
-      Производитель: Perfect Group
+      {{translate('producer')}}: Perfect Group
     </p>
   </section>
 </footer>
