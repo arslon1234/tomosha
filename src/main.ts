@@ -10,5 +10,5 @@ const app = createApp(App);
 app.provide('i18n', i18n);
 app.use(router);
 app.use(ElementPlus)
-app.use(i18n)
+
 app.mount('#app')

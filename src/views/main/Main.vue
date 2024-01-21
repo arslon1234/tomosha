@@ -1,27 +1,58 @@
 <template>
-  <div>
-    <Carousel>
-      <Slide v-for="slide in 10" :key="slide">
-        <div class="carousel__item">{{ slide }}
-          <img :src="main_1"/></div>
-      </Slide>
+  <div class="main">
+    <Navbar navbar_style="transparent"/>
+  </div>
+  <div class="relative ">
 
-      <template #addons>
-        <Navigation/>
-        <Pagination/>
-      </template>
-    </Carousel>
+    <el-carousel indicator-position="outside" trigger="click">
+      <el-carousel-item v-for="item in data" :key="item">
+        <h3 text="2xl" justify="center">{{ item.title }}</h3>
+        <div class="img_wrap">
+          <img :src="item.image" alt="no image">
+        </div>
+      </el-carousel-item>
+    </el-carousel>
+
   </div>
 </template>
 
 <script setup lang="ts">
 import main_1 from "@/assets/main_1.png";
-import {Carousel, Navigation, Pagination, Slide} from 'vue3-carousel'
+import {reactive} from "vue";
+import Navbar from "@/layout/Navbar.vue";
 
-import 'vue3-carousel/dist/carousel.css'
+const data = reactive([
+  {
+    title: "Xatiko 1",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eius obcaecati repudiandae.\n",
+    image: main_1
+  },
+  {
+    title: "Xatiko 2",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eius obcaecati repudiandae.\n",
+    image: main_1
 
+  },
+  {
+    title: "Xatiko 3",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eius obcaecati repudiandae.\n",
+    image: main_1
+
+  },
+  {
+    title: "Xatiko 4",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eius obcaecati repudiandae.\n",
+    image: main_1
+
+  }, {
+    title: "Xatiko 5",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur eius obcaecati repudiandae.\n",
+    image: main_1
+
+  }
+
+])
 </script>
 
 <style scoped>
-
 </style>
