@@ -8,6 +8,8 @@ import LANGUAGE from '../assets/lang.svg'
 import {useTranslation} from "@/plugins/useTranslation.ts";
 const {translate} = useTranslation()
 import i18n from '../plugins/i18n.ts'
+import GenreDropdown from "@/components/helpers/GengreDropdown.vue";
+import ProfileDropdown from "@/components/helpers/ProfileDropdown.vue";
 const navbar_items = reactive([
   {title: translate('premieres'), path: "#"},
   {title: translate('genre'), path: "#"},
@@ -17,6 +19,8 @@ const navbar_items = reactive([
 ])
 const search_modal = ref()
 const dropdown_open = ref(false);
+const genre_dropdown = ref(false)
+const profile_dropdown = ref(false)
 const change_lang = ref("Русский")
 interface Props {
   navbar_style: string
@@ -24,13 +28,12 @@ interface Props {
 const props = defineProps<Props>()
 const navbarStyle = {
   "dark": "bg-black-2 text-[#FFFFFF8C]",
-  "transparent": "bg-[transparent]"
+  "transparent": "bg-[transparent] text-[#fff]"
 }
 const classes = computed(()=>{
   return navbarStyle[props.navbar_style]
 })
 const path = window.location.href.split('/')[3]
-
 
 const changeLanguage =(lang: string)=>{
   if(lang === 'ru'){
@@ -61,6 +64,14 @@ onMounted(() => {
 const openModal =()=>{
   search_modal.value.openModal()
 }
+const genreDropdown =()=>{
+  genre_dropdown.value = true
+}
+const handleGenreClick = () => {
+ genre_dropdown.value = false
+};const handleProfileClick = () => {
+ profile_dropdown.value = false
+};
 </script>
 
 <template>
@@ -68,9 +79,14 @@ const openModal =()=>{
 <nav :class="classes" class="w-full py-[20px] px-[100px] flex items-center justify-between">
   <div class="flex gap-[100px]">
     <img src=".././assets/logo.svg" alt="logo">
-    <ul class="flex gap-[24px]">
+    <ul class="flex gap-[24px] relative">
       <li v-for="(item,index) in navbar_items" :key="index">
-        <a :href="item.path">{{item.title}}</a>
+        <a :href="item.path"
+           :class="item.title === translate('genre') ? '' : ''"
+           @click="item.title === translate('genre') ? genreDropdown() : ''">
+          {{item.title}}
+          <GenreDropdown :genre_dropdown="genre_dropdown" :onClick="handleGenreClick"/>
+        </a>
       </li>
     </ul>
   </div>
@@ -99,9 +115,12 @@ const openModal =()=>{
         </div>
       </transition>
     </div>
-    <article class="bg-black-4 w-[62px] h-[62px] rounded-[50%] flex items-center justify-center">
-      <img :src="USER" alt="user">
-    </article>
+    <div class="relative">
+      <article class="bg-black-4 w-[62px] h-[62px] rounded-[50%] flex items-center justify-center cursor-pointer" @click="profile_dropdown = true">
+        <img :src="USER" alt="user">
+      </article>
+      <ProfileDropdown :profile_dropdown="profile_dropdown" :onClick="handleProfileClick"/>
+    </div>
   </div>
 </nav>
 </template>

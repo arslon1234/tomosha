@@ -14,6 +14,7 @@ const options: I18nOptions = {
     },
     silentTranslationWarn: true,
     fallbackLocale: lang || 'uz',
+    locale: 'uz',
 }
 
 /**
